@@ -1,0 +1,1 @@
+This background used https://github.com/rocksdanister/audio-visualizer-wallpaper as a base.
