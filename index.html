@@ -21,11 +21,14 @@
         }
       }
     </script>
+    <script type="text/javascript">
+      //Global variables
+      var fps = 24;
+      var motionMultiplier = 0.5;
+    </script>
     <script type="module">
       import * as THREE from 'three';
       import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-      const motionMultiplier = 0.5;
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x3B4B43 );
@@ -88,10 +91,24 @@
       }
 
       function animate() {
-        requestAnimationFrame( animate );
+        setTimeout( function() {
+          requestAnimationFrame( animate );
+        }, 1000 / fps );
+
         renderer.render( scene, camera );
       }
       animate();
+    </script>
+    <script type="text/javascript">
+      function livelyPropertyListener(name, val) {
+        switch (name) {
+          case "FPS":
+          {
+            fps = val;
+            break;
+          }
+        }
+      }
     </script>
   </body>
 </html>
