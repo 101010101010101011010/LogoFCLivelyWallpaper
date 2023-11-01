@@ -1,2 +1,10 @@
 {
+    "FPS": {
+        "max": 60,
+        "min": 1,
+        "step": 1,
+        "text": "FPS",
+        "type": "slider",
+        "value": 30
+    }
 }
