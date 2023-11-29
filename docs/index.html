@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
 
-  <body>
-    <h1>Testing GH Pages is slow...</h1>
+  <body style="background-color:#1c87c9;">
+    <div id="loader"></div>
+    <iframe id="logo"></iframe>
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="/js/es-module-shims.js"></script>
     <script type="importmap">
       {
         "imports": {
@@ -21,18 +25,20 @@
       import * as THREE from 'three';
       import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
+      const holder = document.getElementById("logo");
+
       const fps = 24;
       const motionMultiplier = 0.5;
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x3B4B43 );
-      const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      const camera = new THREE.PerspectiveCamera( 50, holder.offsetWidth / window.offsetHeight, 0.1, 1000 );
 
 
-      const renderer = new THREE.WebGLRenderer({antialias: true});
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setSize( window.innerWidth, window.innerHeight );
-      renderer.gammaOutput = true
-      document.body.appendChild( renderer.domElement );
+      renderer.gammaOutput = true;
+      document.getElementById("logo").appendChild( renderer.domElement );
 
 
       const loader = new GLTFLoader();
@@ -78,6 +84,11 @@
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
       })
+
+      function showScene() {
+        document.getElementById("loader").style.visibility = "collapse";
+        document.getElementById("container").classList.toggle("fadeIn");
+      }
 
       function animate() {
         setTimeout( function() {
