@@ -32,13 +32,13 @@
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x3B4B43 );
-      const camera = new THREE.PerspectiveCamera( 50, holder.offsetWidth / window.offsetHeight, 0.1, 1000 );
+      const camera = new THREE.PerspectiveCamera( 50, holder.offsetWidth / window.offsetHeight, 0.1, 1000 );u
 
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.setSize( holder.offsetWidth, holder.offsetHeight );
       renderer.gammaOutput = true;
-      document.getElementById("logo").appendChild( renderer.domElement );
+      holder.appendChild( renderer.domElement );
 
 
       const loader = new GLTFLoader();
@@ -73,21 +73,21 @@
       } );
 
       onmousemove = function(e){
-        const mouseX = (e.clientX / window.innerWidth ) * 2 - 1;
-        const mouseY = (e.clientY / window.innerHeight ) * -2 + 1;
+        const mouseX = (e.clientX / holder.offsetWidth ) * 2 - 1;
+        const mouseY = (e.clientY / holder.offsetHeight ) * -2 + 1;
         scene.getObjectByName("FCLogo").lookAt( mouseX * motionMultiplier, mouseY * motionMultiplier, 1)
         console.log("mouse location:", mouseX, mouseY)
       }
 
       window.addEventListener('resize', () => {
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        camera.aspect = window.innerWidth / window.innerHeight;
+        renderer.setSize(holder.offsetWidth, holder.offsetHeight);
+        camera.aspect = holder.offsetWidth / holder.offsetHeight;
         camera.updateProjectionMatrix();
       })
 
       function showScene() {
         document.getElementById("loader").style.visibility = "collapse";
-        document.getElementById("container").classList.toggle("fadeIn");
+        holder.st.toggle("fadeIn");
       }
 
       function animate() {
