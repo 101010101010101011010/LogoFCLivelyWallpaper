@@ -30,13 +30,13 @@
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x3B4B43 );
-      const camera = new THREE.PerspectiveCamera( 50, document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight, 0.1, 1000 );u
+      const camera = new THREE.PerspectiveCamera( 50, document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight, 0.1, 1000 );
 
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setSize( document.getElementById("container").offsetWidth, document.getElementById("container").offsetHeight );
       renderer.gammaOutput = true;
-      holder.appendChild( renderer.domElement );
+      document.getElementById("container").appendChild( renderer.domElement );
 
 
       const loader = new GLTFLoader();
@@ -62,7 +62,8 @@
 
         camera.position.z = 2;
 
-        showScene()
+        console.log("Show scene");
+        showScene();
 
       }, undefined, function ( error ) {
 
