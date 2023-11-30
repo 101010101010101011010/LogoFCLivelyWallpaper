@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Logo Franco-Cité</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+
+  <body style="background-color:#1c87c9;">
+    <div id="loader"></div>
+    <div id="container" style="height:100%; width:100%;"></div>
+    <script type="module">
+      import * as THREE from 'three';
+      import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+      const fps = 24;
+      const motionMultiplier = 0.5;
+
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color( 0x3B4B43 );
+      const camera = new THREE.PerspectiveCamera( 50, document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight, 0.1, 1000 );
+
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize( document.getElementById("container").offsetWidth, document.getElementById("container").offsetHeight );
+      renderer.gammaOutput = true;
+      document.getElementById("container").appendChild( renderer.domElement );
+
+
+      const loader = new GLTFLoader();
+      loader.load( 'models/FCLogo.glb', function ( gltf ) {
+
+        gltf.scene.name = "FCLogo"
+        scene.add( gltf.scene );
+
+        const spotLight1 = new THREE.SpotLight( 0xffffff, 10 );
+        spotLight1.position.set( 6, 1, 1 );
+        spotLight1.lookAt( 0, 0, 0 )
+        scene.add( spotLight1 );
+
+        const spotLight2 = new THREE.SpotLight( 0xffffff, 10 );
+        spotLight2.position.set( -6, 1, 1 );
+        spotLight2.lookAt( 0, 0, 0 )
+        scene.add( spotLight2 );
+
+        const spotLight3 = new THREE.SpotLight( 0xffffff, 5 );
+        spotLight3.position.set( 0, -4, 1 );
+        spotLight3.lookAt( 0, 0, 0 )
+        scene.add( spotLight3 );
+
+        camera.position.z = 2;
+
+        console.log("Show scene");
+        showScene();
+
+      }, undefined, function ( error ) {
+
+        console.error( error );
+
+      } );
+
+      onmousemove = function(e){
+        const mouseX = (e.clientX / document.getElementById("container").offsetWidth ) * 2 - 1;
+        const mouseY = (e.clientY / document.getElementById("container").offsetHeight ) * -2 + 1;
+        scene.getObjectByName("FCLogo").lookAt( mouseX * motionMultiplier, mouseY * motionMultiplier, 1)
+        console.log("mouse location:", mouseX, mouseY)
+      }
+
+      window.addEventListener('resize', () => {
+        renderer.setSize(document.getElementById("container").offsetWidth, document.getElementById("container").offsetHeight);
+        camera.aspect = document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight;
+        camera.updateProjectionMatrix();
+      })
+
+      function showScene() {
+        document.getElementById("loader").style.visibility = "collapse";
+        document.getElementById("container").classList.toggle("fadeIn");
+      }
+
+      function animate() {
+        setTimeout( function() {
+          requestAnimationFrame( animate );
+        }, 1000 / fps );
+
+        renderer.render( scene, camera );
+      }
+      animate();
+    </script>
+  </body>
+</html>
