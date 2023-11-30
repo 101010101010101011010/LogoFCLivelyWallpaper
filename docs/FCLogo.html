@@ -36,6 +36,10 @@
       renderer.gammaOutput = true;
       document.getElementById("container").appendChild( renderer.domElement );
 
+      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+      const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+      const cube = new THREE.Mesh( geometry, material );
+      scene.add( cube )
 
       const loader = new GLTFLoader();
       loader.load( 'models/FCLogo.glb', function ( gltf ) {
