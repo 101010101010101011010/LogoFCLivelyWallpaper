@@ -28,11 +28,11 @@
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color( 0x3B4C43 );
-      const camera = new THREE.PerspectiveCamera( 50, document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight, 0.1, 1000 );
+      const camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 
       const renderer = new THREE.WebGLRenderer({ antialias: true });
-      renderer.setSize( document.getElementById("container").offsetWidth, document.getElementById("container").offsetHeight );
+      renderer.setSize( window.innerWidth, window.innerWidth );
       renderer.gammaOutput = true;
       document.getElementById("container").appendChild( renderer.domElement );
 
@@ -74,15 +74,15 @@
       } );
 
       onmousemove = function(e){
-        const mouseX = (e.clientX / document.getElementById("container").offsetWidth ) * 2 - 1;
-        const mouseY = (e.clientY / document.getElementById("container").offsetHeight ) * -2 + 1;
+        const mouseX = (e.clientX / window.innerWidth ) * 2 - 1;
+        const mouseY = (e.clientY / window.innerHeight ) * -2 + 1;
         //scene.getObjectByName("FCLogo").lookAt( mouseX * motionMultiplier, mouseY * motionMultiplier, 1)
         console.log("mouse location:", mouseX, mouseY)
       }
 
       window.addEventListener('resize', () => {
-        renderer.setSize(document.getElementById("container").offsetWidth, document.getElementById("container").offsetHeight);
-        camera.aspect = document.getElementById("container").offsetWidth / document.getElementById("container").offsetHeight;
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
       })
 
