@@ -36,16 +36,16 @@
       renderer.gammaOutput = true;
       document.getElementById("container").appendChild( renderer.domElement );
 
-      const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-      const cube = new THREE.Mesh( geometry, material );
-      scene.add( cube )
-
       const loader = new GLTFLoader();
       loader.load( 'models/FCLogo.glb', function ( gltf ) {
 
         gltf.scene.name = "FCLogo"
         scene.add( gltf.scene );
+
+        const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        const cube = new THREE.Mesh( geometry, material );
+        scene.add( cube )
 
         const spotLight1 = new THREE.SpotLight( 0xffffff, 10 );
         spotLight1.position.set( 6, 1, 1 );
