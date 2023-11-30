@@ -5,14 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <link rel="stylesheet" href="styles/style.css" />
-  </head>
-
-  <body style="background-color:#1c87c9;">
-    <div id="loader"></div>
-    <div id="container"></div>
-    <!-- Import maps polyfill -->
-    <!-- Remove this when import maps will be widely supported -->
-    <!--<script async src="https://github.com/101010101010101011010/LogoFCLivelyWallpaper/main/docs/js/es-module-shims.js"></script>-->
     <script type="importmap">
       {
         "imports": {
@@ -21,6 +13,11 @@
         }
       }
     </script>
+  </head>
+
+  <body style="background-color:#1c87c9;">
+    <div id="loader"></div>
+    <div id="container"></div>
     <script type="module">
       import * as THREE from 'three';
       import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
