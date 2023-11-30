@@ -45,7 +45,8 @@
         const geometry = new THREE.BoxGeometry( 1, 1, 1 );
         const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         const cube = new THREE.Mesh( geometry, material );
-        scene.add( cube )
+        cube.scene.name = "TestCube";
+        scene.add( cube );
 
         const spotLight1 = new THREE.SpotLight( 0xffffff, 10 );
         spotLight1.position.set( 6, 1, 1 );
@@ -77,6 +78,7 @@
         const mouseX = (e.clientX / window.innerWidth ) * 2 - 1;
         const mouseY = (e.clientY / window.innerHeight ) * -2 + 1;
         //scene.getObjectByName("FCLogo").lookAt( mouseX * motionMultiplier, mouseY * motionMultiplier, 1)
+        scene.getObjectByName("TestCube").lookAt( mouseX * motionMultiplier, mouseY * motionMultiplier, 1) // TODO: Temporary testing
         console.log("mouse location:", mouseX, mouseY)
       }
 
