@@ -37,7 +37,7 @@
       document.getElementById("container").appendChild( renderer.domElement );
 
       const loader = new GLTFLoader();
-      loader.load( '/models/FCLogo.glb', function ( gltf ) {
+      loader.load( 'models/FCLogo.glb', function ( gltf ) {
 
         gltf.scene.name = "FCLogo"
         scene.add( gltf.scene );
